@@ -1,16 +1,13 @@
 package com.example.myapplication
 
 import android.Manifest
-import android.app.Activity
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.PackageManagerCompat
 import com.budiyev.android.codescanner.*
-import com.budiyev.android.codescanner.ScanMode
 
 class MainActivity : AppCompatActivity() {
     private lateinit var codeScanner: CodeScanner
@@ -22,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA),1001)
         }
-
         val scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
 
         codeScanner = CodeScanner(this, scannerView)
