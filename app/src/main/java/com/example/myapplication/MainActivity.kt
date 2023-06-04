@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -17,12 +16,16 @@ import com.budiyev.android.codescanner.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var codeScanner: CodeScanner
-    private lateinit var btn : Button
     var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val myData: Intent? = result.data
-                if (myData != null) {
+                val myData: Intent? =  result.data
+                val path : String? = result.data?.dataString
+                if(path != null)
+                    Log.d("Yo Path OK",path)
+                else
+                    Log.d("FUck","Damn it")
+                if (myData != null){
                     Log.d("MainActivity", "MY_DATA:" + myData.getStringExtra("Success"))
                 }
             }
@@ -37,16 +40,6 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA),1001)
         }
         val scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
-
-        ///////////Explosion below?////////////
-        btn = findViewById(R.id.FindExcelButton)
-        btn.setOnClickListener {
-            val intent = Intent()
-            .setType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-            .setAction(Intent.ACTION_GET_CONTENT)
-            resultLauncher.launch(intent)
-        }
-        ///////////////////////////////////////
 
         codeScanner = CodeScanner(this, scannerView)
 
@@ -109,7 +102,7 @@ class MainActivity : AppCompatActivity() {
         )
         openDirChooseFile(mimeTypes)
     }
-    fun openExcel(view: View) {
+    fun openExcel(view:View) {
 //        val intent = Intent()
 //            .setType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 //            .setAction(Intent.ACTION_GET_CONTENT)
