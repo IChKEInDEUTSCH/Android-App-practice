@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -14,10 +15,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.*
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var codeScanner: CodeScanner
-    private lateinit var openExcel : Button
+    private lateinit var btn : Button
     var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -37,14 +37,17 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA),1001)
         }
         val scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
-        openExcel = findViewById(R.id.FindExcelButton)
-        openExcel.setOnClickListener {
-            val intent = Intent()
-                .setType("*/*")
-                .setAction(Intent.ACTION_GET_CONTENT)
 
+        ///////////Explosion below?////////////
+        btn = findViewById(R.id.FindExcelButton)
+        btn.setOnClickListener {
+            val intent = Intent()
+            .setType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            .setAction(Intent.ACTION_GET_CONTENT)
             resultLauncher.launch(intent)
         }
+        ///////////////////////////////////////
+
         codeScanner = CodeScanner(this, scannerView)
 
         // Parameters (default values)
@@ -82,6 +85,36 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         codeScanner.releaseResources()
         super.onPause()
+    }
+    fun openDirChooseFile(mimeTypes: Array<String>) {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        if (mimeTypes != null) {
+            intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+        }
+        intent.type = "*/*"
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        // intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);//多选
+        resultLauncher.launch(intent)
+    }
+
+    fun chooseFile() {
+        val mimeTypes = arrayOf<String>(
+            MimeType.DOC,
+            MimeType.DOCX,
+            MimeType.PDF,
+            MimeType.PPT,
+            MimeType.PPTX,
+            MimeType.XLS,
+            MimeType.XLSX
+        )
+        openDirChooseFile(mimeTypes)
+    }
+    fun openExcel(view: View) {
+//        val intent = Intent()
+//            .setType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+//            .setAction(Intent.ACTION_GET_CONTENT)
+//        resultLauncher.launch(intent)
+        chooseFile()
     }
 
 }
