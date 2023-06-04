@@ -3,7 +3,10 @@ Not pratical or useful in anyway at all, just wondering if I colud speed up the 
 
 ----
 Website that helped me through out the process
-- [Able to control file type](https://www.jianshu.com/p/d60b290e1ab1)
+- [Bar/Qr code scanner README.md](https://github.com/yuriy-budiyev/code-scanner)
+- [Basically the same as the official but have some own tweaks](https://www.youtube.com/watch?v=6OFniVVzmgQ&ab_channel=KBCODER)
+- [Able to control intent multiple file types easily](https://www.jianshu.com/p/d60b290e1ab1)
+- [Control intent multiple file types but a bit hard to fix](https://stackoverflow.com/questions/28978581/how-to-make-intent-settype-for-pdf-xlsx-and-txt-file-android)
 - [Explain the warning of hardcoded](https://blog.csdn.net/Future_One/article/details/104451266)
 - [How to fix startActivityForResult is deprecated](https://tw-hkt.blogspot.com/2021/10/startactivityforresult-is-deprecated.html)
 - [I use android:onclick in layout, cuz I gave up fixing the issue](https://stackoverflow.com/questions/44506821/floating-action-button-cast-issue)
@@ -13,3 +16,7 @@ Website that helped me through out the process
 - [Why the let is redundent](https://stackoverflow.com/questions/69344666/redundant-let-call-removal-alters-the-semantic)
 - [warning about "onClick have incorrect signature "](https://stackoverflow.com/questions/36045886/method-has-incorrect-signature)
 - [Retrieving file information](https://developer.android.com/training/secure-file-sharing/retrieve-info#kotlin)
+
+----
+Websites for TODO
+- [Edit Excel](https://www.section.io/engineering-education/android-excel-apachepoi/)
