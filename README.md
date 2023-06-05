@@ -16,6 +16,7 @@ Website that helped me through out the process
 - [Why the let is redundent](https://stackoverflow.com/questions/69344666/redundant-let-call-removal-alters-the-semantic)
 - [warning about "onClick have incorrect signature "](https://stackoverflow.com/questions/36045886/method-has-incorrect-signature)
 - [Retrieving file information](https://developer.android.com/training/secure-file-sharing/retrieve-info#kotlin)
+- [Warning Fix,String literal in `setText` can not be translated. Use Android resources instead.](https://blog.csdn.net/u013642500/article/details/80166941)
 
 ----
 Websites for TODO
