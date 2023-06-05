@@ -7,27 +7,30 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.*
+import java.io.File
+import java.lang.Exception
+import org.apache.poi.ss.usermodel.*
+import org.apache.poi.xssf.usermodel.XSSFWorkbook
 
 class MainActivity : AppCompatActivity() {
     private lateinit var codeScanner: CodeScanner
+    private lateinit var filePath : String
+    private lateinit var excelFile : File
     var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val myData: Intent? =  result.data
                 val path : String? = result.data?.dataString
                 if(path != null)
-                    Log.d("Yo Path OK",path)
+                    filePath = path
                 else
-                    Log.d("FUck","Damn it")
-                if (myData != null){
-                    Log.d("MainActivity", "MY_DATA:" + myData.getStringExtra("Success"))
-                }
+                    Log.d("Error","Go to issue")
             }
         }
 
@@ -40,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA),1001)
         }
         val scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
-
+        val textView = findViewById<TextView>(R.id.textView)
         codeScanner = CodeScanner(this, scannerView)
 
         // Parameters (default values)
@@ -51,11 +54,19 @@ class MainActivity : AppCompatActivity() {
         codeScanner.scanMode = ScanMode.SINGLE // or CONTINUOUS or PREVIEW
         codeScanner.isAutoFocusEnabled = true // Whether to enable auto focus or not
         codeScanner.isFlashEnabled = false // Whether to enable flash or not
-
+        textView.text = getString(R.string.no_file_placeholder)
         // Callbacks
         codeScanner.decodeCallback = DecodeCallback {
-            runOnUiThread {
-                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
+            if(this::filePath.isInitialized && filePath != "null"){
+                runOnUiThread {
+                    Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
+                }
+
+            }
+            else{
+                runOnUiThread {
+                    Toast.makeText(this, "Select File First!!",Toast.LENGTH_LONG).show()
+                }
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
@@ -69,7 +80,6 @@ class MainActivity : AppCompatActivity() {
             codeScanner.startPreview()
         }
     }
-
     override fun onResume() {
         super.onResume()
         codeScanner.startPreview()
@@ -92,11 +102,11 @@ class MainActivity : AppCompatActivity() {
 
     fun chooseFile() {
         val mimeTypes = arrayOf<String>(
-            MimeType.DOC,
-            MimeType.DOCX,
-            MimeType.PDF,
-            MimeType.PPT,
-            MimeType.PPTX,
+//            MimeType.DOC,
+//            MimeType.DOCX,
+//            MimeType.PDF,
+//            MimeType.PPT,
+//            MimeType.PPTX,
             MimeType.XLS,
             MimeType.XLSX
         )
@@ -108,6 +118,13 @@ class MainActivity : AppCompatActivity() {
 //            .setAction(Intent.ACTION_GET_CONTENT)
 //        resultLauncher.launch(intent)
         chooseFile()
+        try {
+            excelFile = File(filePath)
+        }
+        catch(e : Exception){
+            Log.d("Open File Error, try another one",e.toString())
+            filePath = "null"
+        }
     }
 
 }

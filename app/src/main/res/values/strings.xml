@@ -2,4 +2,5 @@
     <string name="app_name">Item Register</string>
     <string name="find_excel">Find Excel</string>
     <string name="Hello_World">Hello World</string>
+    <string name="no_file_placeholder">Select File First !!</string>
 </resources>
