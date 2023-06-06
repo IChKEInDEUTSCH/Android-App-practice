@@ -16,8 +16,6 @@ import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.*
 import java.io.File
 import java.lang.Exception
-import org.apache.poi.ss.usermodel.*
-import org.apache.poi.xssf.usermodel.XSSFWorkbook
 
 class MainActivity : AppCompatActivity() {
     private lateinit var codeScanner: CodeScanner
