@@ -2,7 +2,7 @@
 Not pratical or useful in anyway at all, just wondering if I colud speed up the process of my summer job.
 
 ----
-Website that helped me through out the process
+Websites that helped me through out the process
 - [Bar/Qr code scanner README.md](https://github.com/yuriy-budiyev/code-scanner)
 - [Basically the same as the official but have some own tweaks](https://www.youtube.com/watch?v=6OFniVVzmgQ&ab_channel=KBCODER)
 - [Able to control intent multiple file types easily](https://www.jianshu.com/p/d60b290e1ab1)
@@ -17,6 +17,9 @@ Website that helped me through out the process
 - [warning about "onClick have incorrect signature "](https://stackoverflow.com/questions/36045886/method-has-incorrect-signature)
 - [Retrieving file information](https://developer.android.com/training/secure-file-sharing/retrieve-info#kotlin)
 - [Warning Fix,String literal in `setText` can not be translated. Use Android resources instead.](https://blog.csdn.net/u013642500/article/details/80166941)
+- [Overload resolution ambiguity. All these functions match](https://www.jianshu.com/p/49c81a35fccd)
+- ['if' must have both main and 'else' branches if used as an expression](https://stackoverflow.com/questions/63242273/if-must-have-both-main-and-else-branches-if-used-as-an-expression)
+
 
 ----
 Websites for TODO
