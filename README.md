@@ -1,5 +1,5 @@
 # QuickItemRegisterAndroidApp
-Not pratical or useful in anyway at all, just wondering if I colud speed up the process of my summer job.
+Not pratical or useful in anyway at all, just a practice, the goal of it is to able open up a csv file, scan the qrcode, record the result, that's all.
 
 ----
 Websites that helped me through out the process
